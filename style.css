@@ -1,0 +1,536 @@
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Jua', sans-serif;
+  background-color: #2a2a2a; /* Dark background for the desktop wrapper */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Game Container - Mobile App Feel */
+#game-container {
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  max-height: 800px;
+  background: url('https://images.unsplash.com/photo-1590425332822-4916a49a888a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+  background-color: #f7e1cb; /* Fallback warm color */
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add a warm overlay to the background */
+#game-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 237, 219, 0.85); /* Warm vintage tint */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Common UI Elements */
+.view {
+  position: absolute;
+  top: 60px; /* Below top bar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.view.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  visibility: hidden;
+}
+
+.view.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+  visibility: visible;
+}
+
+/* Top Currency Bar */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 15px;
+  z-index: 20;
+  /* background: rgba(255, 255, 255, 0.4); */
+}
+
+.currency-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 3px solid #d4a373;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 1.1rem;
+  color: #5c4033;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.currency-item .icon {
+  margin-right: 6px;
+  font-size: 1.2rem;
+}
+
+.heart-item { border-color: #ff9999; }
+.gem-item { border-color: #ffb3d9; }
+
+/* Main Title */
+.game-title {
+  color: #ff7f50;
+  text-align: center;
+  font-size: 2.2rem;
+  text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0px 4px 8px rgba(0,0,0,0.2);
+  margin-top: 10px;
+  z-index: 2;
+}
+
+/* Cat Character */
+.cat-character-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 250px;
+  z-index: 2;
+}
+
+.cat-sprite {
+  width: 160px;
+  height: 180px;
+  background-color: #fff;
+  border-radius: 50% 50% 40% 40%;
+  position: relative;
+  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1), 0 10px 15px rgba(0,0,0,0.2);
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.cat-sprite::before, .cat-sprite::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  width: 50px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0px -10px 20px rgba(0,0,0,0.05);
+}
+
+.cat-sprite::before { left: 10px; transform: rotate(-20deg); }
+.cat-sprite::after { right: 10px; transform: rotate(20deg); }
+
+.cat-sprite .eyes {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Simple eyes and mouth injected via CSS for cat */
+.cat-sprite {
+  background-image: 
+    radial-gradient(circle at 45px 80px, #333 12px, transparent 13px),
+    radial-gradient(circle at 115px 80px, #333 12px, transparent 13px),
+    radial-gradient(circle at 80px 105px, #ff9999 5px, transparent 6px);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Lobby Interface */
+.lobby-interactive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: 30px;
+  z-index: 2;
+}
+
+/* Gacha Machine */
+.gacha-machine {
+  width: 150px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.gacha-machine:active {
+  transform: scale(0.95);
+}
+
+.gacha-globe {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 4px solid #8fce00;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  box-shadow: inset 20px 20px 30px rgba(255,255,255,0.8), inset -10px -10px 20px rgba(0,0,0,0.1);
+}
+
+.gacha-ball {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.gacha-ball.red { background: #ff5e5e; top: 90px; left: 20px; }
+.gacha-ball.blue { background: #5e9eff; top: 100px; left: 60px; }
+.gacha-ball.yellow { background: #ffde5e; top: 110px; left: 40px; }
+.gacha-ball.pink { background: #ff99cc; top: 80px; left: 90px; }
+
+.gacha-base {
+  width: 140px;
+  height: 60px;
+  background: #a3e635;
+  border: 3px solid #65a30d;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0px;
+  left: 5px;
+}
+.gacha-base::after {
+  content: '';
+  width: 40px;
+  height: 20px;
+  background: #333;
+  position: absolute;
+  bottom: 10px;
+  left: 47px;
+  border-radius: 5px;
+}
+
+/* Lobby Controls Layout */
+.lobby-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 90%;
+  margin-top: 10px;
+}
+
+/* Buttons */
+button {
+  font-family: 'Jua', sans-serif;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.menu-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(#fff, #ffe4b5);
+  border: 4px solid #cd853f;
+  color: #8b4513;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 0 #cd853f, 0 8px 10px rgba(0,0,0,0.2);
+  transition: all 0.1s;
+}
+
+.menu-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #cd853f, 0 2px 2px rgba(0,0,0,0.2);
+}
+
+.menu-btn .btn-icon {
+  font-size: 1.8rem;
+  margin-bottom: 2px;
+}
+
+/* Gacha Buttons */
+.gacha-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: -15px;
+}
+
+.gacha-btn {
+  background: linear-gradient(#ff9a9e, #fecfef);
+  border: 4px solid #ff758c;
+  border-radius: 25px;
+  padding: 8px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 0 #ff758c, 0 6px 10px rgba(0,0,0,0.2);
+  transition: all 0.1s;
+}
+
+.gacha-btn.ten {
+  background: linear-gradient(#84fab0, #8fd3f4);
+  border-color: #4facfe;
+  box-shadow: 0 4px 0 #4facfe, 0 6px 10px rgba(0,0,0,0.2);
+  font-size: 1rem;
+}
+
+.gacha-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent, 0 2px 2px rgba(0,0,0,0.2);
+}
+
+
+/* Shop & Inventory Shared Headers */
+.view-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 3px solid rgba(212, 163, 115, 0.5);
+  z-index: 10;
+}
+
+.back-btn {
+  background: #ffcc99;
+  border: 2px solid #e69900;
+  border-radius: 12px;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: #663300;
+  font-size: 1rem;
+}
+
+.view-title {
+  flex-grow: 1;
+  text-align: center;
+  margin-right: 40px; /* Offset to center title despite back button */
+  color: #ff8c00;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+/* Shop and Inventory Grid Items */
+.shop-grid, .inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+  width: 100%;
+  z-index: 2;
+}
+
+.item-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #d4a373;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Rarities */
+.rarity-badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+.card-n { border-color: #cd7f32; }
+.card-r { border-color: #8fce00; background: #f0fdf4; }
+.card-sr { border-color: #d87093; background: #fff1f2; }
+.card-ssr { border-color: #ffd700; background: #fffbeb; box-shadow: 0 0 15px gold; }
+
+.badge-n { background: #cd7f32; }
+.badge-r { background: #8fce00; }
+.badge-sr { background: #d87093; }
+.badge-ssr { background: #ffd700; }
+
+.item-icon {
+  font-size: 3rem;
+  margin: 10px 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-name {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.buy-btn, .equip-btn {
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: #a3e635;
+  border: 2px solid #65a30d;
+  color: #333;
+}
+
+.equip-btn[data-equipped="true"] {
+  background: #d1d5db;
+  border-color: #9ca3af;
+}
+
+/* Category styling */
+.inventory-categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  z-index: 2;
+  width: 100%;
+}
+
+.category-btn {
+  background: #ffecd2;
+  border: 2px solid #fcb69f;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 1rem;
+  color: #d35400;
+  font-weight: bold;
+}
+.category-btn.active {
+  background: #fcb69f;
+  color: #fff;
+}
+
+.inventory-stats {
+  width: 100%;
+  text-align: left;
+  padding: 0 20px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  z-index: 2;
+}
+
+
+/* Modal Overlay */
+.modal-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gacha-result-modal {
+  background: #fff;
+  border: 5px solid #ffb6c1;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay:not(.hidden) .gacha-result-modal {
+  transform: scale(1);
+}
+
+.gacha-announcement {
+  color: #ff69b4;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.gacha-result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.confirm-btn {
+  background: #ffcc99;
+  border: 3px solid #ff9933;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #663300;
+  box-shadow: 0 4px 0 #ff9933;
+}
+.confirm-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 transparent;
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>냥집사 가챠라이프</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Dongle:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="currency-item">
+                <span class="icon fish-icon">🐟</span>
+                <span id="fish-count" class="count">12,500</span>
+            </div>
+            <div class="currency-item gem-item">
+                <span class="icon gem-icon">💎</span>
+                <span id="gem-count" class="count">320</span>
+            </div>
+            <div class="currency-item heart-item">
+                <span class="icon heart-icon">💖</span>
+                <span id="heart-count" class="count">15/30</span>
+            </div>
+        </header>
+
+        <!-- Main Views -->
+        <!-- View: Lobby -->
+        <main id="view-lobby" class="view active">
+            <h1 class="game-title">✨ 냥집사<br>가챠라이프 ✨</h1>
+
+            <div class="cat-character-container lobby" onclick="clickCat()">
+                <div class="cat-sprite" id="main-cat"></div>
+            </div>
+
+            <div class="lobby-interactive">
+                <div class="gacha-machine" id="gacha-clicker">
+                    <!-- Gacha SVG / Img -->
+                    <div class="gacha-globe">
+                        <div class="gacha-ball red"></div>
+                        <div class="gacha-ball blue"></div>
+                        <div class="gacha-ball yellow"></div>
+                        <div class="gacha-ball pink"></div>
+                    </div>
+                    <div class="gacha-base"></div>
+                </div>
+
+                <div class="lobby-controls">
+                    <button class="menu-btn btn-inventory" onclick="switchView('inventory')">
+                        <div class="btn-icon">📦</div>
+                        <span>인벤토리</span>
+                    </button>
+
+                    <div class="gacha-actions">
+                        <button class="gacha-btn single" onclick="performGacha(1)">
+                            <span>뽑기 START!</span><br>
+                            <span class="price">💎 30</span>
+                        </button>
+                        <div class="gacha-multi-btns">
+                            <button class="gacha-btn ten" onclick="performGacha(10)">
+                                <span class="price">💎 270</span><br>10회
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="menu-btn btn-shop" onclick="switchView('shop')">
+                        <div class="btn-icon">🏪</div>
+                        <span>상점</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- View: Shop -->
+        <main id="view-shop" class="view hidden">
+            <div class="view-header">
+                <button class="back-btn" onclick="switchView('lobby')">◀ 로비로</button>
+                <h2 class="view-title">🎀 상점 🎀</h2>
+            </div>
+
+            <div class="cat-character-container shopkeeper">
+                <div class="cat-sprite shopkeeper-cat"></div>
+            </div>
+
+            <div class="shop-grid" id="shop-items-container">
+                <!-- Shop items injected via JS -->
+            </div>
+        </main>
+
+        <!-- View: Inventory -->
+        <main id="view-inventory" class="view hidden">
+            <div class="view-header">
+                <button class="back-btn" onclick="switchView('lobby')">◀ 로비로</button>
+                <h2 class="view-title">🎀 인벤토리 🎀</h2>
+            </div>
+
+            <!-- Categories -->
+            <nav class="inventory-categories">
+                <button class="category-btn active" data-category="all">전체</button>
+                <button class="category-btn" data-category="hat">모자</button>
+                <button class="category-btn" data-category="accessory">악세서리</button>
+                <button class="category-btn" data-category="background">배경</button>
+            </nav>
+
+            <div class="inventory-stats">
+                <span>⭐ 수집률 10/150</span>
+            </div>
+
+            <div class="inventory-grid" id="inventory-items-container">
+                <!-- Inventory items injected via JS -->
+            </div>
+        </main>
+
+        <!-- Gacha Modal Overlays -->
+        <div id="gacha-overlay" class="modal-overlay hidden">
+            <div class="gacha-result-modal">
+                <h2 class="gacha-announcement">🎉 획득! 🎉</h2>
+                <div id="gacha-result-container" class="gacha-result-container">
+                    <!-- Gacha pull results injected -->
+                </div>
+                <button class="confirm-btn" onclick="closeGachaModal()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
