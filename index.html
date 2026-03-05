@@ -33,9 +33,8 @@
         <!-- View: Lobby -->
         <main id="view-lobby" class="view active">
             <h1 class="game-title">✨ 냥집사<br>가챠라이프 ✨</h1>
-
-            <div class="cat-character-container lobby" onclick="clickCat()">
-                <div class="cat-sprite" id="main-cat"></div>
+            <div class="cat-character-container lobby player-cat-preview" onclick="clickCat()">
+                <div class="cat-sprite player-cat" id="main-cat"></div>
             </div>
 
             <div class="lobby-interactive">
@@ -97,6 +96,11 @@
             <div class="view-header">
                 <button class="back-btn" onclick="switchView('lobby')">◀ 로비로</button>
                 <h2 class="view-title">🎀 인벤토리 🎀</h2>
+            </div>
+
+            <!-- Cat Preview for Inventory -->
+            <div class="cat-character-container player-cat-preview">
+                <div class="cat-sprite player-cat" id="inventory-cat"></div>
             </div>
 
             <!-- Categories -->

@@ -208,7 +208,7 @@ document.querySelectorAll('.category-btn').forEach(btn => {
 
 // --- Cat Appearance ---
 function renderCatEquipment() {
-    const allCatSprites = document.querySelectorAll('.cat-sprite');
+    const allCatSprites = document.querySelectorAll('.player-cat');
     const eq = gameState.equipped;
 
     allCatSprites.forEach(sprite => {
@@ -222,6 +222,7 @@ function renderCatEquipment() {
             hatDiv.style.left = '50%';
             hatDiv.style.transform = 'translateX(-50%)';
             hatDiv.style.fontSize = '80px';
+            hatDiv.style.zIndex = '10';
             hatDiv.innerText = ITEMS[eq.hat].icon;
             sprite.appendChild(hatDiv);
         }
@@ -233,32 +234,35 @@ function renderCatEquipment() {
             accDiv.style.left = '50%';
             accDiv.style.transform = 'translateX(-50%)';
             accDiv.style.fontSize = '50px';
+            accDiv.style.zIndex = '10';
             accDiv.innerText = ITEMS[eq.accessory].icon;
             sprite.appendChild(accDiv);
         }
     });
 
-    // For lobby background
-    const container = document.querySelector('.cat-character-container.lobby');
-    if (eq.background) {
-        container.style.background = 'radial-gradient(circle, rgba(255,200,200,0.8) 0%, transparent 60%)';
-        // Add an icon as a background decoration
-        const bgElem = document.createElement('div');
-        bgElem.className = 'bg-decor';
-        bgElem.style.position = 'absolute';
-        bgElem.style.bottom = '-20px';
-        bgElem.style.fontSize = '120px';
-        bgElem.style.zIndex = '-1';
-        bgElem.style.opacity = '0.5';
-        bgElem.innerText = ITEMS[eq.background].icon;
+    // For lobby and inventory backgrounds
+    const playerContainers = document.querySelectorAll('.player-cat-preview');
+    playerContainers.forEach(container => {
+        if (eq.background) {
+            container.style.background = 'radial-gradient(circle, rgba(255,200,200,0.8) 0%, transparent 60%)';
+            // Add an icon as a background decoration
+            const bgElem = document.createElement('div');
+            bgElem.className = 'bg-decor';
+            bgElem.style.position = 'absolute';
+            bgElem.style.bottom = '-20px';
+            bgElem.style.fontSize = '120px';
+            bgElem.style.zIndex = '-1';
+            bgElem.style.opacity = '0.5';
+            bgElem.innerText = ITEMS[eq.background].icon;
 
-        // remove old decors
-        container.querySelectorAll('.bg-decor').forEach(d => d.remove());
-        container.appendChild(bgElem);
-    } else {
-        container.style.background = 'transparent';
-        container.querySelectorAll('.bg-decor').forEach(d => d.remove());
-    }
+            // remove old decors
+            container.querySelectorAll('.bg-decor').forEach(d => d.remove());
+            container.appendChild(bgElem);
+        } else {
+            container.style.background = 'transparent';
+            container.querySelectorAll('.bg-decor').forEach(d => d.remove());
+        }
+    });
 }
 
 
