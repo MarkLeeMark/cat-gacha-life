@@ -7,7 +7,8 @@
 
 body {
   font-family: 'Jua', sans-serif;
-  background-color: #2a2a2a; /* Dark background for the desktop wrapper */
+  background-color: #2a2a2a;
+  /* Dark background for the desktop wrapper */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +23,8 @@ body {
   height: 100vh;
   max-height: 800px;
   background: url('https://images.unsplash.com/photo-1590425332822-4916a49a888a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-  background-color: #f7e1cb; /* Fallback warm color */
+  background-color: #f7e1cb;
+  /* Fallback warm color */
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -34,8 +36,12 @@ body {
 #game-container::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 237, 219, 0.85); /* Warm vintage tint */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 237, 219, 0.85);
+  /* Warm vintage tint */
   z-index: 0;
   pointer-events: none;
 }
@@ -43,7 +49,8 @@ body {
 /* Common UI Elements */
 .view {
   position: absolute;
-  top: 60px; /* Below top bar */
+  top: 60px;
+  /* Below top bar */
   left: 0;
   right: 0;
   bottom: 0;
@@ -94,7 +101,7 @@ body {
   font-size: 1.1rem;
   color: #5c4033;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 100px;
   white-space: nowrap;
 }
@@ -104,15 +111,20 @@ body {
   font-size: 1.2rem;
 }
 
-.heart-item { border-color: #ff9999; }
-.gem-item { border-color: #ffb3d9; }
+.heart-item {
+  border-color: #ff9999;
+}
+
+.gem-item {
+  border-color: #ffb3d9;
+}
 
 /* Main Title */
 .game-title {
   color: #ff7f50;
   text-align: center;
   font-size: 2.2rem;
-  text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0px 4px 8px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 0px #fff, -2px -2px 0px #fff, 2px -2px 0px #fff, -2px 2px 0px #fff, 0px 4px 8px rgba(0, 0, 0, 0.2);
   margin-top: 10px;
   z-index: 2;
 }
@@ -134,11 +146,12 @@ body {
   background-color: #fff;
   border-radius: 50% 50% 40% 40%;
   position: relative;
-  box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1), 0 10px 15px rgba(0,0,0,0.2);
+  box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.2);
   animation: bounce 2s infinite ease-in-out;
 }
 
-.cat-sprite::before, .cat-sprite::after {
+.cat-sprite::before,
+.cat-sprite::after {
   content: '';
   position: absolute;
   top: -20px;
@@ -146,11 +159,18 @@ body {
   height: 60px;
   background-color: #fff;
   border-radius: 50% 50% 0 0;
-  box-shadow: inset 0px -10px 20px rgba(0,0,0,0.05);
+  box-shadow: inset 0px -10px 20px rgba(0, 0, 0, 0.05);
 }
 
-.cat-sprite::before { left: 10px; transform: rotate(-20deg); }
-.cat-sprite::after { right: 10px; transform: rotate(20deg); }
+.cat-sprite::before {
+  left: 10px;
+  transform: rotate(-20deg);
+}
+
+.cat-sprite::after {
+  right: 10px;
+  transform: rotate(20deg);
+}
 
 .cat-sprite .eyes {
   position: absolute;
@@ -162,15 +182,40 @@ body {
 
 /* Simple eyes and mouth injected via CSS for cat */
 .cat-sprite {
-  background-image: 
+  background-image:
     radial-gradient(circle at 45px 80px, #333 12px, transparent 13px),
     radial-gradient(circle at 115px 80px, #333 12px, transparent 13px),
     radial-gradient(circle at 80px 105px, #ff9999 5px, transparent 6px);
 }
 
+/* Player Cat Specifics - Overrides cat-sprite to use image */
+.player-cat {
+  background-image: url('main-cat.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  width: 200px;
+  height: 200px;
+}
+
+.player-cat::before,
+.player-cat::after {
+  display: none !important;
+}
+
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Lobby Interface */
@@ -206,7 +251,7 @@ body {
   position: absolute;
   top: 0;
   overflow: hidden;
-  box-shadow: inset 20px 20px 30px rgba(255,255,255,0.8), inset -10px -10px 20px rgba(0,0,0,0.1);
+  box-shadow: inset 20px 20px 30px rgba(255, 255, 255, 0.8), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .gacha-ball {
@@ -214,13 +259,32 @@ body {
   height: 30px;
   border-radius: 50%;
   position: absolute;
-  box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2), 0 5px 5px rgba(0,0,0,0.2);
+  box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.2), 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-.gacha-ball.red { background: #ff5e5e; top: 90px; left: 20px; }
-.gacha-ball.blue { background: #5e9eff; top: 100px; left: 60px; }
-.gacha-ball.yellow { background: #ffde5e; top: 110px; left: 40px; }
-.gacha-ball.pink { background: #ff99cc; top: 80px; left: 90px; }
+.gacha-ball.red {
+  background: #ff5e5e;
+  top: 90px;
+  left: 20px;
+}
+
+.gacha-ball.blue {
+  background: #5e9eff;
+  top: 100px;
+  left: 60px;
+}
+
+.gacha-ball.yellow {
+  background: #ffde5e;
+  top: 110px;
+  left: 40px;
+}
+
+.gacha-ball.pink {
+  background: #ff99cc;
+  top: 80px;
+  left: 90px;
+}
 
 .gacha-base {
   width: 140px;
@@ -232,6 +296,7 @@ body {
   bottom: 0px;
   left: 5px;
 }
+
 .gacha-base::after {
   content: '';
   width: 40px;
@@ -273,13 +338,13 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 0 #cd853f, 0 8px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 0 #cd853f, 0 8px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.1s;
 }
 
 .menu-btn:active {
   transform: translateY(4px);
-  box-shadow: 0 0 0 #cd853f, 0 2px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 #cd853f, 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .menu-btn .btn-icon {
@@ -303,21 +368,21 @@ button {
   padding: 8px 20px;
   font-size: 1.2rem;
   color: #fff;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-  box-shadow: 0 4px 0 #ff758c, 0 6px 10px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 0 #ff758c, 0 6px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.1s;
 }
 
 .gacha-btn.ten {
   background: linear-gradient(#84fab0, #8fd3f4);
   border-color: #4facfe;
-  box-shadow: 0 4px 0 #4facfe, 0 6px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 0 #4facfe, 0 6px 10px rgba(0, 0, 0, 0.2);
   font-size: 1rem;
 }
 
 .gacha-btn:active {
   transform: translateY(4px);
-  box-shadow: 0 0 0 transparent, 0 2px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 transparent, 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -345,14 +410,16 @@ button {
 .view-title {
   flex-grow: 1;
   text-align: center;
-  margin-right: 40px; /* Offset to center title despite back button */
+  margin-right: 40px;
+  /* Offset to center title despite back button */
   color: #ff8c00;
   font-size: 1.8rem;
   text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
 }
 
 /* Shop and Inventory Grid Items */
-.shop-grid, .inventory-grid {
+.shop-grid,
+.inventory-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
@@ -370,7 +437,7 @@ button {
   align-items: center;
   padding: 10px;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Rarities */
@@ -386,18 +453,44 @@ button {
   align-items: center;
   font-weight: bold;
   color: white;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.card-n { border-color: #cd7f32; }
-.card-r { border-color: #8fce00; background: #f0fdf4; }
-.card-sr { border-color: #d87093; background: #fff1f2; }
-.card-ssr { border-color: #ffd700; background: #fffbeb; box-shadow: 0 0 15px gold; }
+.card-n {
+  border-color: #cd7f32;
+}
 
-.badge-n { background: #cd7f32; }
-.badge-r { background: #8fce00; }
-.badge-sr { background: #d87093; }
-.badge-ssr { background: #ffd700; }
+.card-r {
+  border-color: #8fce00;
+  background: #f0fdf4;
+}
+
+.card-sr {
+  border-color: #d87093;
+  background: #fff1f2;
+}
+
+.card-ssr {
+  border-color: #ffd700;
+  background: #fffbeb;
+  box-shadow: 0 0 15px gold;
+}
+
+.badge-n {
+  background: #cd7f32;
+}
+
+.badge-r {
+  background: #8fce00;
+}
+
+.badge-sr {
+  background: #d87093;
+}
+
+.badge-ssr {
+  background: #ffd700;
+}
 
 .item-icon {
   font-size: 3rem;
@@ -416,7 +509,8 @@ button {
   text-align: center;
 }
 
-.buy-btn, .equip-btn {
+.buy-btn,
+.equip-btn {
   width: 100%;
   padding: 5px 0;
   border-radius: 10px;
@@ -451,6 +545,7 @@ button {
   color: #d35400;
   font-weight: bold;
 }
+
 .category-btn.active {
   background: #fcb69f;
   color: #fff;
@@ -470,8 +565,11 @@ button {
 /* Modal Overlay */
 .modal-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   z-index: 100;
   display: flex;
   justify-content: center;
@@ -495,7 +593,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   transform: scale(0.8);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -530,6 +628,7 @@ button {
   color: #663300;
   box-shadow: 0 4px 0 #ff9933;
 }
+
 .confirm-btn:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 transparent;
