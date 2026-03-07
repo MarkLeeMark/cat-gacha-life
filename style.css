@@ -20,8 +20,9 @@ body {
 #game-container {
   width: 100%;
   max-width: 480px;
-  height: 100vh;
-  max-height: 800px;
+  height: 100dvh;
+  /* Use dynamic viewport height if supported */
+  max-height: 100vh;
   background: url('https://images.unsplash.com/photo-1590425332822-4916a49a888a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
   background-color: #f7e1cb;
   /* Fallback warm color */
@@ -632,4 +633,94 @@ button {
 .confirm-btn:active {
   transform: translateY(4px);
   box-shadow: 0 0 0 transparent;
+}
+
+/* =========================================
+   Responsive Design (PC & Tablet Layout)
+   ========================================= */
+@media (min-width: 900px) {
+  body {
+    /* Use a nice dynamic pastel background for PC */
+    background: radial-gradient(circle at center, #ffd194, #70e1f5);
+  }
+
+  #game-container {
+    max-width: 1200px;
+    width: 95vw;
+    height: 85vh;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 70px 1fr;
+  }
+
+  /* Currency Bar Spans across top */
+  .top-bar {
+    position: relative;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    border-bottom: 2px solid rgba(212, 163, 115, 0.5);
+  }
+
+  /* Views become side-by-side columns */
+  .view {
+    position: relative;
+    top: 0;
+    grid-row: 2;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent;
+  }
+
+  #view-lobby {
+    grid-column: 1;
+    border-right: 2px dashed rgba(212, 163, 115, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    /* Slight highlight */
+  }
+
+  #view-shop {
+    grid-column: 2;
+    border-right: 2px dashed rgba(212, 163, 115, 0.5);
+  }
+
+  #view-inventory {
+    grid-column: 3;
+  }
+
+  /* Hide mobile view-switching controls on PC */
+  .lobby-controls .menu-btn {
+    display: none;
+  }
+
+  .lobby-controls {
+    justify-content: center;
+    /* Center the gacha button */
+  }
+
+  .view-header .back-btn {
+    display: none;
+    /* No need to go back */
+  }
+
+  .view-header {
+    justify-content: center;
+  }
+
+  .view-title {
+    margin-right: 0 !important;
+    /* Remove center offset used for back button */
+  }
+
+  /* Make grid items larger to fill space */
+  .shop-grid,
+  .inventory-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
 }
